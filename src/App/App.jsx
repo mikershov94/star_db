@@ -9,14 +9,16 @@ import PersonDetails from './../components/PersonDetails';
 
 const App = () => {
 	return(
-		<div className="container-fluid" >
-			<Header />
-			<div className="box">
+		<div>
+			<div className="container-fluid" >
+				<Header />
+			</div>
+			<div className="d-flex justify-content-center">
 				<RandomPlanet />
-				<div className="row body-app">
-					<ItemList />
-					<PersonDetails />
-				</div>
+			</div>
+			<div className="container-fluid body-app d-flex justify-content-between">
+				<ItemList />
+				<PersonDetails />
 			</div>
 		</div>	
 	);

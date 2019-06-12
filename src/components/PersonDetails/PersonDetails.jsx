@@ -4,9 +4,9 @@ import './PersonDetails.sass';
 
 const PersonDetails = () => {
 	return(
-		<div className="col-sm-6">
+		<div className="mr-4 person-details">
 			<div className="row">
-				<div className="col-sm-5">
+				<div className="col-5">
 					<img 
 						src="https://vignette.wikia.nocookie.net/ru.starwars/images/e/eb/ArtooTFA2-Fathead.png/revision/latest?cb=20151106094927"
 						alt="droid"
@@ -14,11 +14,13 @@ const PersonDetails = () => {
 						className="im-person"
 					 />
 				</div>
-				<div className="col-sm-7">
+				<div className="col person-data">
 				<h3>R2-D2</h3>
-				<div>Gender man</div>
-				<div>Birth Year 43</div>
-				<div>Eye Color red</div>
+				<ul className="list-group">
+					<li className="list-group-item person-prop-item">Gender man</li>
+					<li className="list-group-item person-prop-item">Birth Year 43</li>
+					<li className="list-group-item person-prop-item">Eye Color red</li>
+				</ul>
 			</div>
 			</div>
 		</div>
