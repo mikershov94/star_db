@@ -1,6 +1,9 @@
 import React from 'react';
 
 import SwapiService from './../../services/swapi-service';
+import DataPlanet from './DataPlanet';
+import Spinner from './../Spinner';
+import ErrorIndicator from './../ErrorIndicator';
 
 import './RandomPlanet.sass'
 
@@ -8,52 +11,58 @@ class RandomPlanet extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			name: null,
-			population: null,
-			rotationPeriod: null,
-			diameter: null,
+			planet: {},
+			loading: true,
+			error: false,
 		};
 
 		this.swapiService = new SwapiService();
 
+		this.onPlanetLoaded = (planet) => {
+			this.setState({ 
+						planet,
+						loading: false,
+					});
+		};
+
+		this.onError = (error) => {
+			this.setState({
+				loading: false,
+				error: true,
+			})
+		};
+
 		this.updatePlanet = () => {
-			const id = Math.floor(Math.random()*25 + 2);
+			const id = Math.floor(Math.random()*25 + 3);
 
 			this.swapiService
 				.getPlanet(id)
-				.then((planet) => {
-					this.setState({
-						id,
-						name: planet.name,
-						population: planet.population,
-						rotationPeriod: planet.rotation_period,
-						diameter: planet.diameter,
-					});
-				});
+				.then(this.onPlanetLoaded)
+				.catch(this.onError);
 		};
 
 		this.updatePlanet();
 	}
 
+	componentDidMount() {
+		setInterval(this.updatePlanet, 10000);
+	}
+
 	render() {
-		const { id, name, population, rotationPeriod, diameter } = this.state;
+
+		const { planet, loading, error } = this.state;
+
+		const hasData = !( loading || error );
+
+		const errorMessage = error ? <ErrorIndicator /> : null;
+		const spinner = loading ? <Spinner /> : null;
+		const content = hasData ? <DataPlanet planet={planet} /> : null;
 
 		return(
-			<div className="row mx-sm-4 slider">
-				<div className="col-4">
-					<img 
-					src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-					className="img-planet"
-					alt="planet" />
-				</div>
-				<div className="col planet-props">
-					<h3>{name}</h3>
-					<ul className="list-group">
-						<li className="list-group-item planet-prop-item">Population {population}</li>
-						<li className="list-group-item planet-prop-item">Rotation Period {rotationPeriod}</li>
-						<li className="list-group-item planet-prop-item">Diameter {diameter}</li>
-					</ul>
-				</div>
+			<div className="row mx-sm-4 slider d-flex justify-content-center">
+				{errorMessage}
+				{spinner}
+				{content}
 			</div>
 	);
 	}

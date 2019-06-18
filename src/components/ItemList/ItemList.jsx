@@ -1,19 +1,65 @@
 import React from 'react';
+import SwapiService from './../../services/swapi-service';
+import Spinner from './../Spinner';
 
 import './ItemList.sass'
 
-const ItemList = () => {
-	return(
-		<div className="mx-sm-4 item-list">
-			<ul className="list-group">
-				<li className="list-group-item person-item">Luke Skywalker (19BBY)</li>
-				<li className="list-group-item person-item">C-3PO (112BBY)</li>
-				<li className="list-group-item person-item">R2-D2 (33BBY)</li>
-				<li className="list-group-item person-item">Darth Vader (41.9BBY)</li>
-				<li className="list-group-item person-item">Leia Organa (19BBY)</li>
-			</ul>
-		</div>
-	);
+class ItemList extends React.Component {
+	constructor() {
+		super();
+
+		this.swapi = new SwapiService();
+
+		this.state = {
+			persons: null,
+		};
+
+		this.renderItems = (items) => {
+			return items.map(({id, name}) => {
+				let activeItem = "";
+				if (this.props.itemSelected === id) {
+					activeItem = " active";
+				}
+
+				return(
+					<li className={`list-group-item list-group-item-action${activeItem} person-item`}
+							key={id}
+							onClick={() => this.props.onItemClick(id)}>
+						{name}
+					</li>
+				);
+			})
+		};
+
+	}
+
+	componentDidMount() {
+		this.swapi.getAllPeople()
+			.then((persons) => {
+				this.setState({
+					persons: persons,
+				});
+			});
+	}
+
+	render() {
+		const { persons } = this.state;
+
+		if (!persons) {
+			return <Spinner />
+		}
+
+		const items = this.renderItems(persons);
+
+		return(
+			<div className="mx-sm-4 item-list">
+				<ul className="list-group">
+					{items}
+				</ul>
+			</div>
+		);
+	}
+
 };
 
 export default ItemList;

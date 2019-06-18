@@ -14,31 +14,77 @@ class SwapiService {
 		return await res.json();
 	}
 
-	async getAllPeople() {
-		const res = await this.getReource('/people/');
-		return res.results
+	_extractId(item) {											//получаем ID сущности
+		const idRegExp = /\/([0-9]*)\/$/;	//регулярным выражением достаем из URL
+
+		return item.url.match(idRegExp)[1]; //возвращаем id из URL, который хранится в props
 	}
 
-	getPerson(id) {
-		return this.getReource(`/people/${id}`);
+	_transformPlanet = (planet) => {	//принимаем объект planet и возвращаем объект с его состояниями
+		return {
+			id: this._extractId(planet),
+			name: planet.name,
+			population: planet.population,
+			rotationPeriod: planet.rotation_period,
+			diameter: planet.diameter,
+		};
+	}
+
+	_transformStarship = (starship) => {	//принимаем объект starship и возвращаем объект с его состояниями
+		return {
+			id: this._extractId(starship),
+			name: starship.name,
+			model: starship.model,
+			manufacturer: starship.manufacturer,
+			costInCredits: starship.costInCredits,
+			length: starship.length,
+			crew: starship.crew,
+			passengers: starship.passengers,
+			cargoCapacity: starship.cargoCapacity,
+		};
+	}
+
+	_transformPerson = (person) => {	//принимаем объект person и возвращаем объект с его состояниями
+		return {
+			id: this._extractId(person),
+			name: person.name,
+			gender: person.gender,
+			birthYear: person.birthYear,
+			eyeColor: person.eyeColor,
+		};
+	}
+
+	async getAllPeople() {
+		const res = await this.getReource('/people/');	//асинхронно обращаемся к API
+		return res.results.map(this._transformPerson);	//для каждого полученного объекта применяем трансформацию
+	}
+
+	async getPerson(id) {
+		const person = await this.getReource(`/people/${id}`);	//асинхронно обращаемся к API
+
+		return this._transformPerson(person);		//возвращаем полученный объект трансформированным
 	}
 
 	async getAllPlanets() {
-		const res = await this.getReource('/planets/');
-		return res.results
+		const res = await this.getReource('/planets/');	//асинхронно обращаемся к API
+		return res.results.map(this._transformPlanet);	//для каждого полученного объекта применяем трансформацию
 	}
 
-	getPlanet(id) {
-		return this.getReource(`/planets/${id}`);
+	async getPlanet(id) {
+		const planet = await this.getReource(`/planets/${id}`);	//асинхронно обращаемся к API
+
+		return this._transformPlanet(planet);	//возвращаем полученный объект трансформированным
 	}
 
 	async getAllStarships() {
-		const res = await this.getReource('/starships/');
-		return res.results
+		const res = await this.getReource('/starships/');	//асинхронно обращаемся к API
+		return res.results.map(this._transformStarship);	//для каждого полученного объекта применяем трансформацию
 	}
 
-	getStarship(id) {
-		return this.getReource(`/starships/${id}`);
+	async getStarship(id) {
+		const starship = await this.getReource(`/starships/${id}`);	//асинхронно обращаемся к API
+
+		return this._transformStarship(starship)	//возвращаем полученный объект трансформированным
 	}
 
 }
