@@ -22,6 +22,7 @@ class RandomPlanet extends React.Component {
 			this.setState({ 
 						planet,
 						loading: false,
+						error: false,
 					});
 		};
 
