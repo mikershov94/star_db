@@ -1,5 +1,4 @@
 import React from 'react';
-import SwapiService from './../../services/swapi-service';
 import Spinner from './../Spinner';
 import ErrorIndicator from './../ErrorIndicator';
 
@@ -9,10 +8,8 @@ class ItemList extends React.Component {
 	constructor() {
 		super();
 
-		this.swapi = new SwapiService();
-
 		this.state = {
-			persons: null,
+			items: null,
 			loading: true,
 			errors: false,
 		};
@@ -22,32 +19,38 @@ class ItemList extends React.Component {
 				loading: false,
 				errors: true,
 			});
-		}
+		};
 
-		this.renderItems = (items) => {
-			return items.map(({id, name}) => {
+	}
+
+	renderItems(items) {
+			return items.map((item) => {
+				const { id } = item;
+				const label = this.props.renderItem(item)
+
 				let activeItem = "";
 				if (this.props.itemSelected === id) {
 					activeItem = " active";
 				}
 
+
 				return(
 					<li className={`list-group-item list-group-item-action${activeItem} person-item`}
 							key={id}
 							onClick={() => this.props.onItemClick(id)}>
-						{name}
+						{label}
 					</li>
 				);
 			})
-		};
-
-	}
+	};
 
 	componentDidMount() {
-		this.swapi.getAllPeople()
-			.then((persons) => {
+		const { getData } = this.props;
+
+		getData()
+			.then((items) => {
 				this.setState({
-					persons: persons,
+					items: items,
 					loading: false,
 					errors: false,
 				});
@@ -56,7 +59,7 @@ class ItemList extends React.Component {
 	}
 
 	render() {
-		const { persons, loading, errors } = this.state;
+		const { items, loading, errors } = this.state;
 
 		if (errors) {
 			return (
@@ -74,11 +77,11 @@ class ItemList extends React.Component {
 			);
 		};
 
-		const items = this.renderItems(persons);
+		const list = this.renderItems(items);
 
 		return(
 			<div className="mx-sm-4 item-list">
-				{items}
+				{list}
 			</div>
 		);
 	}

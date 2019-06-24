@@ -12,6 +12,11 @@ class PersonPage extends React.Component {
 		this.state = {
 			hasErrors: false,
 		};
+
+		this.renderItem = (item) => {
+			return `${item.name} (${item.birthYear})`;
+		};
+
 	}
 
 	componentDidCatch() {
@@ -21,6 +26,7 @@ class PersonPage extends React.Component {
 	}
 
 	render() {
+
 		if (this.state.hasErrors) {
 			return <ErrorIndicator />;
 		}
@@ -28,7 +34,9 @@ class PersonPage extends React.Component {
 		return(
 			<div className="container-fluid body-app d-flex justify-content-between">
 				<ItemList onItemClick={this.props.onItemClick}
-									itemSelected={this.props.itemSelected} /> 
+									itemSelected={this.props.itemSelected}
+									getData={this.props.swapi.getAllPeople}
+									renderItem={this.renderItem} /> 
 				<PersonDetails personId={this.props.itemSelected} />
 			</div>
 		);

@@ -54,34 +54,34 @@ class SwapiService {
 		};
 	}
 
-	async getAllPeople() {
+	getAllPeople = async () => {
 		const res = await this.getReource('/people/');	//асинхронно обращаемся к API
 		return res.results.map(this._transformPerson);	//для каждого полученного объекта применяем трансформацию
 	}
 
-	async getPerson(id) {
+	getPerson = async (id) => {
 		const person = await this.getReource(`/people/${id}`);	//асинхронно обращаемся к API
 
 		return this._transformPerson(person);		//возвращаем полученный объект трансформированным
 	}
 
-	async getAllPlanets() {
+	getAllPlanets = async () => {
 		const res = await this.getReource('/planets/');	//асинхронно обращаемся к API
 		return res.results.map(this._transformPlanet);	//для каждого полученного объекта применяем трансформацию
 	}
 
-	async getPlanet(id) {
+	getPlanet = async (id) => {
 		const planet = await this.getReource(`/planets/${id}`);	//асинхронно обращаемся к API
 
 		return this._transformPlanet(planet);	//возвращаем полученный объект трансформированным
 	}
 
-	async getAllStarships() {
+	getAllStarships = async () => {
 		const res = await this.getReource('/starships/');	//асинхронно обращаемся к API
 		return res.results.map(this._transformStarship);	//для каждого полученного объекта применяем трансформацию
 	}
 
-	async getStarship(id) {
+	getStarship = async (id) => {
 		const starship = await this.getReource(`/starships/${id}`);	//асинхронно обращаемся к API
 
 		return this._transformStarship(starship)	//возвращаем полученный объект трансформированным

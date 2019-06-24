@@ -7,10 +7,17 @@ import RandomPlanet from './../components/RandomPlanet';
 import ErrorIndicator from './../components/ErrorIndicator';
 import ErrorButton from './../components/ErrorButton';
 import PersonPage from './../components/PersonPage';
+import ItemList from './../components/ItemList';
+import PersonDetails from './../components/PersonDetails';
+
+import SwapiService from './../services/swapi-service';
 
 class App extends React.Component {
 	constructor() {
 		super();
+
+		this.swapi = new SwapiService();
+
 		this.state = {
 			itemSelected: 5,
 			visibleRandomPlanet: true,
@@ -67,7 +74,26 @@ class App extends React.Component {
 					<ErrorButton />
 				</div>
 				<PersonPage onItemClick={this.onItemClick}
-										itemSelected={this.state.itemSelected} />
+										itemSelected={this.state.itemSelected}
+										swapi={this.swapi} />
+
+				<div className="container-fluid body-app d-flex justify-content-between">
+					<ItemList onItemClick={this.props.onItemClick}
+										itemSelected={this.props.itemSelected}
+										getData={this.swapi.getAllPlanets}
+										renderItem={(item) => item.name} /> 
+					<PersonDetails personId={this.state.itemSelected} />
+				</div>
+
+				<div className="container-fluid body-app d-flex justify-content-between">
+					<ItemList onItemClick={this.props.onItemClick}
+										itemSelected={this.props.itemSelected}
+										getData={this.swapi.getAllStarships} /> 
+					<PersonDetails personId={this.state.itemSelected} />
+				</div>
+
+
+
 			</div>	
 		);
 	}
