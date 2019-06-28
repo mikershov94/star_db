@@ -4,7 +4,7 @@ import Spinner from './../Spinner';
 import ErrorIndicator from './../ErrorIndicator';
 import ErrorButton from './../ErrorButton';
 
-import './PersonDetails.sass';
+import './ItemDetails.sass';
 
 class PersonDetails extends React.Component {
 	constructor() {

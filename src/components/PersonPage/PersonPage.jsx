@@ -13,10 +13,6 @@ class PersonPage extends React.Component {
 			hasErrors: false,
 		};
 
-		this.renderItem = (item) => {
-			return `${item.name} (${item.birthYear})`;
-		};
-
 	}
 
 	componentDidCatch() {

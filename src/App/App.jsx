@@ -6,9 +6,10 @@ import Header from './../components/Header';
 import RandomPlanet from './../components/RandomPlanet';
 import ErrorIndicator from './../components/ErrorIndicator';
 import ErrorButton from './../components/ErrorButton';
-import PersonPage from './../components/PersonPage';
+//import PersonPage from './../components/PersonPage';
+import Row from './../components/Row';
 import ItemList from './../components/ItemList';
-import PersonDetails from './../components/PersonDetails';
+import ItemDetails from './../components/ItemDetails';
 
 import SwapiService from './../services/swapi-service';
 
@@ -35,6 +36,7 @@ class App extends React.Component {
 				itemSelected: id,
 			})
 		};
+
 	}
 
 	componentDidCatch() {
@@ -42,6 +44,10 @@ class App extends React.Component {
 		this.setState({
 			hasErrors: true,
 		})
+	}
+
+	renderItem(item) {
+			return item.name;
 	}
 
 	render() {
@@ -59,6 +65,16 @@ class App extends React.Component {
 
 		const widget = this.state.visibleRandomPlanet ? <RandomWidget /> : null;
 
+		const itemList = (
+				<ItemList onItemClick={this.props.onItemClick}
+										itemSelected={this.props.itemSelected}
+										getData={this.swapi.getAllPlanets} />
+		);
+
+		const itemDetails = (
+				<ItemDetails personId={this.state.itemSelected} />
+		);
+
 
 		return(
 			<div>
@@ -68,31 +84,16 @@ class App extends React.Component {
 				{widget}
 				<div className="container d-flex">
 					<button className="btn btn-warning btns-app"
-									onClick={this.onToggleButton}>
+																		onClick={this.onToggleButton}>																																																																	
 						Toggle Random Planet
 					</button>
 					<ErrorButton />
 				</div>
-				<PersonPage onItemClick={this.onItemClick}
+			{/*<PersonPage onItemClick={this.onItemClick}
 										itemSelected={this.state.itemSelected}
-										swapi={this.swapi} />
+										swapi={this.swapi} />			*/}																																																																																																				
 
-				<div className="container-fluid body-app d-flex justify-content-between">
-					<ItemList onItemClick={this.props.onItemClick}
-										itemSelected={this.props.itemSelected}
-										getData={this.swapi.getAllPlanets}
-										renderItem={(item) => item.name} /> 
-					<PersonDetails personId={this.state.itemSelected} />
-				</div>
-
-				<div className="container-fluid body-app d-flex justify-content-between">
-					<ItemList onItemClick={this.props.onItemClick}
-										itemSelected={this.props.itemSelected}
-										getData={this.swapi.getAllStarships} /> 
-					<PersonDetails personId={this.state.itemSelected} />
-				</div>
-
-
+				<Row left={itemList} right={itemDetails} />
 
 			</div>	
 		);

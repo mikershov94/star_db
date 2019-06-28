@@ -5,8 +5,8 @@ import ErrorIndicator from './../ErrorIndicator';
 import './ItemList.sass'
 
 class ItemList extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			items: null,
@@ -25,8 +25,7 @@ class ItemList extends React.Component {
 
 	renderItems(items) {
 			return items.map((item) => {
-				const { id } = item;
-				const label = this.props.renderItem(item)
+				const { id, name } = item;
 
 				let activeItem = "";
 				if (this.props.itemSelected === id) {
@@ -38,7 +37,7 @@ class ItemList extends React.Component {
 					<li className={`list-group-item list-group-item-action${activeItem} person-item`}
 							key={id}
 							onClick={() => this.props.onItemClick(id)}>
-						{label}
+						{name}
 					</li>
 				);
 			})
