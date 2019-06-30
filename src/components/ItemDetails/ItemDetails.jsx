@@ -6,14 +6,15 @@ import ErrorButton from './../ErrorButton';
 
 import './ItemDetails.sass';
 
-class PersonDetails extends React.Component {
+class ItemDetails extends React.Component {
 	constructor() {
 		super();
 
 		this.swapi = new SwapiService();
 
 		this.state = {
-			person: null,
+			item: null,
+			image: null,
 			loading: true,
 			errors: false,
 		}
@@ -25,13 +26,14 @@ class PersonDetails extends React.Component {
 			})
 		};
 
-		this.updatePerson = () => {
-			const { personId } = this.props;
+		this.updateItem = () => {
+			const { itemId, getData, getImageUrl } = this.props;
 
-			this.swapi.getPerson(personId)
-				.then((person) => {
+			getData(itemId)
+				.then((item) => {
 					this.setState({
-						person: person,
+						item: item,
+						image: getImageUrl(item),
 						loading: false,
 						errors: false,
 					});
@@ -41,20 +43,21 @@ class PersonDetails extends React.Component {
 	}
 
 	componentDidMount() {
-		this.updatePerson();
+		this.updateItem();
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props.personId !== prevProps.personId) {
+		if (this.props.itemId !== prevProps.itemId) {
 			this.setState({
 				loading: true,
 			})
-			this.updatePerson();
+			this.updateItem();
 		}
 	}
 
 	render() {
-		const { person, loading, errors } = this.state;
+		const { item, loading, errors, image } = this.state;
+		console.log(image);
 
 		if (errors) {
 			return(
@@ -74,21 +77,23 @@ class PersonDetails extends React.Component {
 
 		return(
 			<div className="mr-4 person-details">
-				<div className="row">
-					<div className="col-5">
+				<div className="row d-flex">
+					<div>
 						<img 
-							src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`}
-							alt="droid"
+							src={image}
+							alt="avatar"
 							height="150px"
 							className="im-person"
 						 />
 					</div>
 					<div className="col person-data">
-					<h3>{person.name}</h3>
+					<h3>{item.name}</h3>
 					<ul className="list-group">
-						<li className="list-group-item person-prop-item">Gender {person.gender}</li>
-						<li className="list-group-item person-prop-item">Birth Year {person.birthYear}</li>
-						<li className="list-group-item person-prop-item">Eye Color {person.eyeColor}</li>
+						{
+							React.Children.map(this.props.children, (child, index) => {
+								return React.cloneElement(child, { item });	//создать копию элемента, добавив в копию свойство (props) item
+							})
+						}
 					</ul>
 					<ErrorButton />
 				</div>
@@ -99,4 +104,4 @@ class PersonDetails extends React.Component {
 	
 };
 
-export default PersonDetails;
+export default ItemDetails;

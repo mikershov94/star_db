@@ -1,3 +1,3 @@
-import PersonDetails from './PersonDetails';
+import ItemDetails from './ItemDetails';
 
-export default PersonDetails;
+export default ItemDetails;

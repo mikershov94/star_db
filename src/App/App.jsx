@@ -3,13 +3,24 @@ import React from 'react';
 import './App.sass';
 
 import Header from './../components/Header';
-import RandomPlanet from './../components/RandomPlanet';
+//import RandomPlanet from './../components/RandomPlanet';
 import ErrorIndicator from './../components/ErrorIndicator';
-import ErrorButton from './../components/ErrorButton';
+//import ErrorButton from './../components/ErrorButton';
 //import PersonPage from './../components/PersonPage';
-import Row from './../components/Row';
-import ItemList from './../components/ItemList';
-import ItemDetails from './../components/ItemDetails';
+//import Row from './../components/Row';
+//import ItemList from './../components/ItemList';
+//import ItemDetails from './../components/ItemDetails';
+//import Record from './../components/Record';
+import { 
+	PersonList,
+	PlanetList,
+	StarshipList,
+	PersonDetails,
+	PlanetDetails,
+	StarshipDetails
+ } from './../components/SwComponents';
+
+import { SwapiProvider } from './../components/SwapiServiceContext';
 
 import SwapiService from './../services/swapi-service';
 
@@ -55,17 +66,17 @@ class App extends React.Component {
 			return <ErrorIndicator />;
 		}
 
-		const RandomWidget = () => {
+		/*const RandomWidget = () => {
 			return(
 				<div className="d-flex justify-content-center">
 					<RandomPlanet />
 				</div>
 			);
 		};
+		*/
+		//const widget = this.state.visibleRandomPlanet ? <RandomWidget /> : null;
 
-		const widget = this.state.visibleRandomPlanet ? <RandomWidget /> : null;
-
-		const itemList = (
+		/*const itemList = (
 				<ItemList onItemClick={this.props.onItemClick}
 										itemSelected={this.props.itemSelected}
 										getData={this.swapi.getAllPlanets} />
@@ -73,29 +84,33 @@ class App extends React.Component {
 
 		const itemDetails = (
 				<ItemDetails personId={this.state.itemSelected} />
-		);
-
+		); */
 
 		return(
-			<div>
-				<div className="container-fluid" >
-					<Header />
-				</div>
-				{widget}
-				<div className="container d-flex">
-					<button className="btn btn-warning btns-app"
-																		onClick={this.onToggleButton}>																																																																	
-						Toggle Random Planet
-					</button>
-					<ErrorButton />
-				</div>
-			{/*<PersonPage onItemClick={this.onItemClick}
-										itemSelected={this.state.itemSelected}
-										swapi={this.swapi} />			*/}																																																																																																				
+			<SwapiProvider value={ this.swapi } >
+				<div>
+					<div className="container-fluid" >
+						<Header />
+					</div>
+					{/*{widget}
+					<div className="container d-flex">
+						<button className="btn btn-warning btns-app"
+																			onClick={this.onToggleButton}>																																																																	
+							Toggle Random Planet
+						</button>
+						<ErrorButton />
+					</div> */}																																																																																																				
 
-				<Row left={itemList} right={itemDetails} />
+					<PersonDetails itemId={11} />
+					<PlanetDetails itemId={2} />
+					<StarshipDetails itemId={5} />
 
-			</div>	
+					<PersonList />
+					<PlanetList />
+					<StarshipList />
+
+				</div>
+			</SwapiProvider>	
 		);
 	}
 };
