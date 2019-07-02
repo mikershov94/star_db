@@ -8,7 +8,7 @@ class StarshipPage extends React.Component {
 		super();
 
 		this.state = {
-			itemSelected: null,
+			itemSelected: 1,
 		};
 
 		this.onItemClick = (id) => {
