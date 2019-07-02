@@ -3,7 +3,7 @@ import React from 'react';
 import Spinner from './../Spinner';
 import ErrorIndicator from './../ErrorIndicator';
 
-const withData = (View, getData) => {
+const withData = (View) => {
 	return class extends React.Component {
 		constructor(props) {
 			super(props);
@@ -23,8 +23,8 @@ const withData = (View, getData) => {
 
 		}
 
-		componentDidMount() {
-			getData()
+		update() {
+			this.props.getData()
 				.then((data) => {
 					this.setState({
 						data: data,
@@ -33,6 +33,22 @@ const withData = (View, getData) => {
 					});
 				})
 				.catch(this.onError);
+		};
+
+		componentDidCatch() {
+			this.setState({
+				errors: true,
+			});
+		}
+
+		componentDidMount() {
+			this.update();
+		}
+
+		componentDidUpdate(prevProps) {
+			if (this.props.getData !== prevProps.getData) {
+				this.update();
+			}
 		}
 
 		render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({ onChangeService }) => {
 	return(
 		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
 		  <a className="navbar-brand" href="s#">Star DB</a>
@@ -20,6 +20,12 @@ const Header = () => {
 		        <a className="nav-link" href="s#">Starships</a>
 		      </li>
 		    </ul>
+
+		    <button className="btn btn-primary"
+		    				onClick={onChangeService}>
+		    	Change Service
+		    </button>
+
 		  </div>
 		</nav>
 	);

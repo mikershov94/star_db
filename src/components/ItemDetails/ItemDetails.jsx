@@ -42,12 +42,20 @@ class ItemDetails extends React.Component {
 		};
 	}
 
+	componentDidCatch() {
+		this.setState({
+			errors: true,
+		});
+	}
+
 	componentDidMount() {
 		this.updateItem();
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props.itemId !== prevProps.itemId) {
+		if ((this.props.itemId !== prevProps.itemId) ||
+					(this.props.getData !== prevProps.getData) ||
+						(this.props.getImageUrl !== prevProps.getImageUrl)) {
 			this.setState({
 				loading: true,
 			})
@@ -57,7 +65,6 @@ class ItemDetails extends React.Component {
 
 	render() {
 		const { item, loading, errors, image } = this.state;
-		console.log(image);
 
 		if (errors) {
 			return(
