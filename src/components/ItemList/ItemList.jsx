@@ -33,4 +33,8 @@ const ItemList = (props) => {
 
 };
 
+ItemList.defaultProps = {
+	onItemClick: () => {}
+};
+
 export default ItemList;

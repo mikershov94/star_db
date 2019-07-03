@@ -4,6 +4,7 @@ import SwapiService from './../../services/swapi-service';
 import DataPlanet from './DataPlanet';
 import Spinner from './../Spinner';
 import ErrorIndicator from './../ErrorIndicator';
+import PropTypes from 'prop-types';
 
 import './RandomPlanet.sass'
 
@@ -68,6 +69,10 @@ class RandomPlanet extends React.Component {
 	);
 	}
 
+};
+
+RandomPlanet.propTypes = {
+	updatePlanet: PropTypes.number
 };
 
 export default RandomPlanet;
