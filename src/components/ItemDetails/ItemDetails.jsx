@@ -66,6 +66,12 @@ class ItemDetails extends React.Component {
 	render() {
 		const { item, loading, errors, image } = this.state;
 
+		if (item === null) {
+			return(
+				<span>Select item</span>
+			);
+		}
+
 		if (errors) {
 			return(
 				<div className="mr-4 person-details d-flex justify-content-center">
