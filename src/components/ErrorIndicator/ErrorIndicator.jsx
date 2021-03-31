@@ -5,12 +5,12 @@ import './ErrorIndicator.sass';
 const ErrorIndicator = () => {
 	return(
 		<div className="error-indicator">
-			<span className="boom">BOOM!</span>
+			<span className="boom">БАХ!</span>
 			<span>
-				something has gone terribly wrong
+				что-то пошло не так...
 			</span>
 			<span>
-				(but we already sent droids to fix it)
+				но мы уже выслали дроидов чтобы все исправить
 			</span>
 		</div>
 	);
