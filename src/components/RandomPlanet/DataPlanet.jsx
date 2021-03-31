@@ -14,9 +14,9 @@ const DataPlanet = (props) => {
 				<div className="col planet-props">
 					<h3>{name}</h3>
 					<ul className="list-group">
-						<li className="list-group-item planet-prop-item">Population {population}</li>
-						<li className="list-group-item planet-prop-item">Rotation Period {rotationPeriod}</li>
-						<li className="list-group-item planet-prop-item">Diameter {diameter}</li>
+						<li className="list-group-item planet-prop-item">Население:	{population}</li>
+						<li className="list-group-item planet-prop-item">Период вращения: {rotationPeriod}</li>
+						<li className="list-group-item planet-prop-item">Диаметр: {diameter}</li>
 					</ul>
 				</div>
 		</React.Fragment>
