@@ -9,7 +9,7 @@ const PeoplePage = ({ history, match }) => {
 
 	return(
 		<Row left={<PersonList onItemClick={ (id) => { history.push(id) } } />}
-				 right={<PersonDetails itemId={id} />} />
+			 right={<PersonDetails itemId={id} />} />
 	);
 }
 

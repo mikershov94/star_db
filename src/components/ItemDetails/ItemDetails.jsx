@@ -68,7 +68,7 @@ class ItemDetails extends React.Component {
 
 		if (item === null) {
 			return(
-				<span>Select item</span>
+				<span className="mr-4 person-details d-flex justify-content-center">Select item</span>
 			);
 		}
 

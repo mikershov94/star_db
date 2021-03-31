@@ -9,9 +9,6 @@ import { SwapiProvider } from './../components/SwapiServiceContext';
 import { SwapiService, MocService } from './../services';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { StarshipList } from "./../components/SwComponents";
-import { StarshipDetails } from "./../components/SwComponents";
-
 class App extends React.Component {
 	constructor() {
 		super();
@@ -57,17 +54,13 @@ class App extends React.Component {
 						</div>
 						<RandomWidget />	
 						
-						<Route path="/" exact render={() => <h1>Welcome to StarDB application</h1>} />
+						<Route path="/" exact render={() => {
+									<h1>Добро пожаловать в приложение StarDB</h1> }}
+								/>
 						<Route path="/people/:id?" component={PeoplePage} />
 						<Route path="/planets/" component={PlanetPage} />
 						<Route path="/starships/" exact component={StarshipPage} />
-						<Route path="/starships/:id" 
-									 render={ ({ match }) => {
-									 	const { id } = match.params;
-
-									 	return <StarshipDetails itemId={id} />;
-									 } 
-										} />
+						<Route path="/starships/:id" component={StarshipPage} />
 						<Route path="/login"
 									 render={ () => 
 									 	<LoginPage isLoggedIn={this.state.isLoggedIn}

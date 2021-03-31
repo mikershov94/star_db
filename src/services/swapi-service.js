@@ -1,6 +1,6 @@
 class SwapiService {
 	constructor() {
-		this._apiBase = 'https://swapi.co/api';
+		this._apiBase = 'https://swapi.dev/api';
 		this._imageBase = 'https://starwars-visualguide.com/assets/img/'
 	}
 
@@ -15,13 +15,13 @@ class SwapiService {
 		return await res.json();
 	}
 
-	_extractId(item) {											//получаем ID сущности
+	_extractId(item) {						//получаем ID сущности
 		const idRegExp = /\/([0-9]*)\/$/;	//регулярным выражением достаем из URL
 
 		return item.url.match(idRegExp)[1]; //возвращаем id из URL, который хранится в props
 	}
 
-	_transformPlanet = (planet) => {	//принимаем объект planet и возвращаем объект с его состояниями
+	_transformPlanet = (planet) => {		//принимаем объект planet и возвращаем объект с его состояниями
 		return {
 			id: this._extractId(planet),
 			name: planet.name,

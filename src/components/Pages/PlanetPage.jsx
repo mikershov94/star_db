@@ -24,7 +24,7 @@ class PlanetPage extends React.Component {
 
 		return(
 			<Row left={<PlanetList onItemClick={this.onItemClick} />}
-					 right={<PlanetDetails itemId={itemSelected} />} />
+				 right={<PlanetDetails itemId={itemSelected} />} />
 		);
 	}
 

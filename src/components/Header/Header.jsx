@@ -12,25 +12,25 @@ const Header = ({ onChangeService }) => {
 			<div className="navbar-collapse collapse" id="navbarColor03">
 		    <ul className="navbar-nav mr-auto">
 		      <li className="nav-item active">
-			       <Link className="nav-link" to="/people/">Persons </Link>
+			       <Link className="nav-link" to="/people/">Персонажи </Link>
 		      </li>
 		      <li className="nav-item">
-		        <Link className="nav-link" to="/planets/">Planets</Link>
+		        <Link className="nav-link" to="/planets/">Планеты</Link>
 		      </li>
 		      <li className="nav-item">
-		        <Link className="nav-link" to="/starships/">Starships</Link>
+		        <Link className="nav-link" to="/starships/">Корабли</Link>
 		      </li>
 		      <li className="nav-item">
-		        <Link className="nav-link" to="/login">Login</Link>
+		        <Link className="nav-link" to="/login">Вход</Link>
 		      </li>
 		      <li className="nav-item">
-		        <Link className="nav-link" to="/secret">Secret</Link>
+		        <Link className="nav-link" to="/secret">Секрет</Link>
 		      </li>
 		    </ul>
 
 		    <button className="btn btn-primary"
 		    				onClick={onChangeService}>
-		    	Change Service
+		    	Поменять сервис
 		    </button>
 
 		  </div>
