@@ -55,8 +55,11 @@ class App extends React.Component {
 						<RandomWidget />	
 						
 						<Route path="/" exact render={() => {
-									<h1>Добро пожаловать в приложение StarDB</h1> }}
-								/>
+							<div>
+								<h1>Добро пожаловать в приложение StarDB</h1>
+								<PeoplePage />
+							</div>
+						}}/>
 						<Route path="/people/:id?" component={PeoplePage} />
 						<Route path="/planets/" component={PlanetPage} />
 						<Route path="/starships/" exact component={StarshipPage} />

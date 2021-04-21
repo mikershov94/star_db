@@ -53,12 +53,54 @@ class MocService {
 
 	];
 
+	_extractId(item) {						
+		const idRegExp = /\/([0-9]*)\/$/;	
+
+		return item.url.match(idRegExp)[1];
+	}
+
+	_transformPlanet = (planet) => {		//принимаем объект planet и возвращаем объект с его состояниями
+		return {
+			id: this._extractId(planet),
+			name: planet.name,
+			population: planet.population,
+			rotationPeriod: planet.rotation_period,
+			diameter: planet.diameter,
+		};
+	}
+
+	_transformStarship = (starship) => {	//принимаем объект starship и возвращаем объект с его состояниями
+		return {
+			id: this._extractId(starship),
+			name: starship.name,
+			model: starship.model,
+			manufacturer: starship.manufacturer,
+			costInCredits: starship.costInCredits,
+			length: starship.length,
+			crew: starship.crew,
+			passengers: starship.passengers,
+			cargoCapacity: starship.cargoCapacity,
+		};
+	}
+
+	_transformPerson = (person) => {	//принимаем объект person и возвращаем объект с его состояниями
+		return {
+			id: this._extractId(person),
+			name: person.name,
+			gender: person.gender,
+			birthYear: person.birth_year,
+			eyeColor: person.eye_color,
+		};
+	}
+
 	getAllPeople = async () => {
 		return this._people;	//для каждого полученного объекта применяем трансформацию
 	}
 
 	getPerson = async (id) => {
-		return this._people[1];
+		const person = await this._people[id];
+		
+		return this._transformPerson(person);
 	}
 
 	getImagePerson = (item) => {
