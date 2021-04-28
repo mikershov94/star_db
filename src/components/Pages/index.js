@@ -3,6 +3,7 @@ import PlanetPage from './PlanetPage';
 import StarshipPage from './StarshipPage';
 import LoginPage from './LoginPage';
 import SecretPage from './SecretPage';
+import MainPage from './MainPage';
 
 export {
 	PeoplePage,
@@ -10,4 +11,5 @@ export {
 	StarshipPage,
 	LoginPage,
 	SecretPage,
+	MainPage
 };

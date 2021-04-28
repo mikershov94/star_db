@@ -8,7 +8,6 @@ const ItemList = (props) => {
 
 	const items = data.map((item) => {
 		const { id } = item;
-		console.log(id)
 		const label = renderName(item);
 
 		let activeItem = "";
