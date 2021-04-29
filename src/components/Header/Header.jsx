@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './Header.sass'
+
 const Header = ({ onChangeService }) => {
 	return(
 		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
@@ -11,8 +13,8 @@ const Header = ({ onChangeService }) => {
 
 			<div className="navbar-collapse collapse" id="navbarColor03">
 		    <ul className="navbar-nav mr-auto">
-		      <li className="nav-item active">
-			       <Link className="nav-link" to="/people/">Персонажи </Link>
+		      <li className="nav-item">
+			    <Link className="nav-link" to="/people/">Персонажи </Link>
 		      </li>
 		      <li className="nav-item">
 		        <Link className="nav-link" to="/planets/">Планеты</Link>

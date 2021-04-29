@@ -4,7 +4,7 @@ import './App.sass';
 
 import Header from './../components/Header';
 import RandomPlanet from './../components/RandomPlanet';
-import { PeoplePage, PlanetPage, StarshipPage, SecretPage, LoginPage } from './../components/Pages';
+import { PeoplePage, PlanetPage, StarshipPage, SecretPage, LoginPage, MainPage } from './../components/Pages';
 import { SwapiProvider } from './../components/SwapiServiceContext';
 import { SwapiService, MocService } from './../services';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -54,12 +54,7 @@ class App extends React.Component {
 						</div>
 						<RandomWidget />	
 						
-						<Route path="/" exact render={() => 
-							<div>
-								<h1>Добро пожаловать в приложение StarDB</h1>
-								<PeoplePage />
-							</div>
-						}/>
+						<Route path="/" exact component={MainPage} />
 						<Route path="/people/:id?" component={PeoplePage} />
 						<Route path="/planets/" component={PlanetPage} />
 						<Route path="/starships/" exact component={StarshipPage} />
