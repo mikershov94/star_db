@@ -15,7 +15,8 @@ class App extends React.Component {
 
 		this.state = {
 			swapi: new SwapiService(),
-			isLoggedIn: false
+			isLoggedIn: false,
+			isTestedData: false
 		};
 
 		this.onLogin = () => {
@@ -27,9 +28,11 @@ class App extends React.Component {
 		this.onChangeService = () => {
 			this.setState(({ swapi }) => {
 				const Service = swapi instanceof SwapiService ? MocService : SwapiService;
+				const isRandomWidgetView = this.state.isTestedData
 
 				return {
 					swapi: new Service(),
+					isTestedData: !isRandomWidgetView
 				};
 			})
 		};
@@ -37,7 +40,11 @@ class App extends React.Component {
 	}
 
 	render() {
-		const RandomWidget = () => {
+		const RandomWidget = () => { 
+			if (this.state.isTestedData) {
+				return null;
+			}
+
 			return(
 				<div className="d-flex justify-content-center">
 					<RandomPlanet />
