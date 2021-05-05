@@ -8,12 +8,14 @@ const LoginPage = ({ isLoggedIn, onLogin }) => {
 	};
 
 	return(
-		<div className="jumbotron">
-			<p>Login to see secret page!!!</p>
-			<button className="btn btn-primary"
-							onClick={onLogin}>
-				Login
-			</button>
+		<div className="page-container">
+			<div className="main-page">
+				<p>Войдите для просмотра секретной страницы</p>
+				<button className="btn btn-primary"
+						onClick={onLogin}>
+					Войти
+				</button>
+			</div>	
 		</div>
 	);
 
